@@ -90,12 +90,13 @@
   _.reject = function(collection, test) {
     // TIP: see if you can re-use _.filter() here, without simply
     // copying code in and modifying it
-    var failed = [];
-    _.each(collection, function(e) {
-      if (!test(e))
-        failed.push(e);
-    });
-    return failed;
+    // var failed = [];
+    // _.each(collection, function(e) {
+    //   if (!test(e))
+    //     failed.push(e);
+    // });
+    // return failed;
+    return _.filter(collection, function(e) { return !test(e); });
   };
 
   // Produce a duplicate-free version of the array.
@@ -115,9 +116,12 @@
     // like each(), but in addition to running the operation on all
     // the members, it also maintains an array of results.
     var mapped = [];
-    for (var i = 0; i < collection.length; i++) {
-      mapped.push(iterator(collection[i]));
-    }
+    // for (var i = 0; i < collection.length; i++) {
+    //   mapped.push(iterator(collection[i]));
+    // }
+    _.each(collection, function(e) {
+      mapped.push(iterator(e));
+    });
     return mapped;
   };
 
@@ -162,15 +166,21 @@
   _.reduce = function(collection, iterator, accumulator) {
     if (arguments.length === 3) {
       var current = accumulator || 0;
-      for (var i = 0; i < collection.length; i++) {
-        current = iterator(current, collection[i]);
-      }
+      // for (var i = 0; i < collection.length; i++) {
+      //   current = iterator(current, collection[i]);
+      // }
+      _.each(collection, function(e) {
+        current = iterator(current, e);
+      });
       return current;
     } else {
       var currently = collection[0];
       for (var i = 1; i < collection.length; i++) {
         currently = iterator(currently, collection[i]);
       }
+      // _.each(collection, function(e) {
+      //   currently = iterator(currently, e);
+      // });
       return currently;
     }
   };
