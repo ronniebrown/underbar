@@ -116,9 +116,6 @@
     // like each(), but in addition to running the operation on all
     // the members, it also maintains an array of results.
     var mapped = [];
-    // for (var i = 0; i < collection.length; i++) {
-    //   mapped.push(iterator(collection[i]));
-    // }
     _.each(collection, function(e) {
       mapped.push(iterator(e));
     });
@@ -166,9 +163,6 @@
   _.reduce = function(collection, iterator, accumulator) {
     if (arguments.length > 2) {
       var current = accumulator || 0;
-      // for (var i = 0; i < collection.length; i++) {
-      //   current = iterator(current, collection[i]);
-      // }
       _.each(collection, function(e) {
         current = iterator(current, e);
       });
@@ -178,9 +172,6 @@
       for (var i = 1; i < collection.length; i++) {
         currently = iterator(currently, collection[i]);
       }
-      // _.each(collection, function(e) {
-      //   currently = iterator(currently, e);
-      // });
       return currently;
     }
   };
