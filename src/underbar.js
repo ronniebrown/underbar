@@ -195,8 +195,10 @@
   _.every = function(collection, iterator) {
     // TIP: Try re-using reduce() here.
     return _.reduce(collection, function(all, e) {
+      iterator = iterator || _.identity;
       return !!iterator(e) && all;
-    }, true);      
+    }, true);  
+
   };
 
 
@@ -206,8 +208,9 @@
   // provided, provide a default one
   _.some = function(collection, iterator) {
     return !(_.every(collection, function(e) {
-          return !iterator(e);
-        }));
+      iterator = iterator || _.identity;
+      return !iterator(e);
+      }));
     // TIP: There's a very clever way to re-use every() here.
   };
 
